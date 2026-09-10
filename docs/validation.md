@@ -7,6 +7,7 @@ Completed 10 September 2026:
 - `npm test`: all 5 booking tests passed, covering London midnight/DST, next Saturday and year boundaries, impossible dates, party-size validation, frozen inputs and the provider URL contract.
 - `npm run test:live`: the existing Wix reservation embed, DesignMyNight venue widget and booking landing page each returned HTTP 200 and the expected content. No reservation was submitted.
 - Local preview readiness returned HTTP 200.
+- GitHub Pages preparation: all page links, anchors and font references also pass validation under the `/VicBat/` project path. The menu JSON is resolved relative to its JavaScript module, preserving the project prefix.
 
 There is no framework compilation, TypeScript or external linter in this dependency-free static project. Node syntax checks and the repository’s validation script are the available source checks.
 

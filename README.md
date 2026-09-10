@@ -30,6 +30,10 @@ An optional, feature-detected WebMCP tool, `prepare_table_booking`, updates the 
 
 ## Publishing
 
-The GitHub `origin` remains `jaydsingh1193/VicBat`. The private Sites preview is separate from the pub’s public domain. Static assets can also be hosted elsewhere directly from `dist/`. No DNS or existing Wix configuration has been changed.
+The public GitHub repository is `jaydsingh1193/VicBat`. GitHub Pages is configured to publish the website at https://jaydsingh1193.github.io/VicBat/. The original Sites preview also remains publicly accessible. No DNS or existing Wix configuration has been changed.
+
+The GitHub Pages workflow in `.github/workflows/pages.yml` validates the site and publishes only `dist/`. It supports manual runs and redeploys when site changes reach `main`. All local links, fonts, scripts and the menu JSON request are relative, so the same source works at a domain root or the `/VicBat/` project path.
+
+GitHub Pages uses GitHub Actions as its publishing source. The repository was made public with the user’s explicit approval on 10 September 2026, enabling Pages on the current GitHub plan. The workflow publishes only website assets; documentation, tests and project metadata remain in the source repository rather than the hosted site.
 
 Before replacing the public site, resolve the factual questions in the content audit, confirm the booking journey in the venue’s production account, and add redirects for the existing URLs. Domain cutover is a separate action.

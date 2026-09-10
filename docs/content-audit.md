@@ -44,4 +44,4 @@ https://developers.designmynight.com/faqs/booking-url/
 
 Read-only live checks verify that the existing embed, provider script and handoff page respond successfully. This does not prove table availability or create a reservation. A full end-to-end booking should be checked with the venue before public domain cutover.
 
-No existing website settings, booking-provider configuration or public DNS records were changed. The new preview is private.
+No existing website settings, booking-provider configuration or public DNS records were changed. The Sites preview was initially private and was subsequently made public at the user’s request. The user also explicitly approved making the source repository public to enable GitHub Pages.

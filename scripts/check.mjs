@@ -17,10 +17,13 @@ for (const section of [...menu.food, ...menu.wine]) {
   }
 }
 
-async function checkReference(reference, page) {
+async function checkReference(reference, page, basePath = '/') {
   if (!reference || /^(https?:|mailto:|tel:|data:)/.test(reference)) return;
-  const url = new URL(reference.replaceAll('&amp;', '&'), `https://local.test/${page}`);
-  const target = url.pathname === '/' ? '/index.html' : url.pathname;
+  const url = new URL(reference.replaceAll('&amp;', '&'), `https://local.test${basePath}${page}`);
+  assert.equal(url.origin, 'https://local.test', `Unexpected external origin: ${reference}`);
+  assert.ok(url.pathname.startsWith(basePath), `Reference escapes ${basePath}: ${reference}`);
+  const relative = url.pathname.slice(basePath.length);
+  const target = `/${relative || 'index.html'}`;
   const path = resolve(root, `.${target}`);
   assert.ok(path.startsWith(`${root}/`), `Reference escapes static root: ${reference}`);
   const file = await stat(path);
@@ -39,12 +42,16 @@ for (const page of ['index.html', 'menu.html']) {
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${page} needs one H1`);
   assert.ok(html.includes('<html lang="en-GB">'), `${page} must declare language`);
   assert.ok(!/<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/.test(html), `${page} contains a nested link`);
-  for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) await checkReference(match[1], page);
+  for (const basePath of ['/', '/VicBat/']) {
+    for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) await checkReference(match[1], page, basePath);
+  }
   for (const match of html.matchAll(/<img\b[^>]*>/g)) assert.match(match[0], /\balt="[^"]*"/, 'Image missing alt text');
 }
 
 const styles = await readFile(`${root}/styles.css`, 'utf8');
-for (const match of styles.matchAll(/url\(['"]?([^)'"\s]+)/g)) await checkReference(match[1], 'styles.css');
+for (const basePath of ['/', '/VicBat/']) {
+  for (const match of styles.matchAll(/url\(['"]?([^)'"\s]+)/g)) await checkReference(match[1], 'styles.css', basePath);
+}
 assert.ok(!/#[\da-f]{3,8}\b/i.test(styles.replace(/:root\s*\{[^}]+\}/, '')), 'Colours must use shared theme tokens');
 
 for (const directory of ['dist', 'scripts', 'tests']) {
@@ -55,4 +62,4 @@ for (const directory of ['dist', 'scripts', 'tests']) {
     assert.equal(result.status, 0, result.stderr);
   }
 }
-console.log('Passed: JavaScript syntax, page references, anchors, menu inventory, dietary labels, image text and colour tokens.');
+console.log('Passed: JavaScript syntax, root and /VicBat/ page references, anchors, menu inventory, dietary labels, image text and colour tokens.');

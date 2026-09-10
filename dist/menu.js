@@ -16,7 +16,7 @@ function followSectionLink() {
 }
 
 try {
-  const response = await fetch('/menu-data.json', { signal: AbortSignal.timeout(10000) });
+  const response = await fetch(new URL('./menu-data.json', import.meta.url), { signal: AbortSignal.timeout(10000) });
   if (!response.ok) throw new Error(`Menu request failed (${response.status}).`);
   const data = await response.json();
   const sections = wine ? data.wine : data.food;
