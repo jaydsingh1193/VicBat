@@ -2,15 +2,44 @@
 
 Source checked on 10 September 2026: https://www.thevictoriabattersea.co.uk/
 
+## Owner updates — 6 October 2026
+
+The owner's new instructions supersede the original offers. All seven daily offers are now maintained in `src/components/offers.html` and appear on the homepage and dedicated What’s on page:
+
+- Munchy Mondays: any two main meals, only pay for one.
+- Tasty Tuesdays: 11oz Black Angus ribeye and chips, £15.
+- Wobbly Wednesdays: 25% off any bottle or glass of wine.
+- Tapas Thursdays: any four small plates or sides, £20.
+- Finally Fridays: £5 cocktails, 8pm to midnight; open until 2am.
+- Spritz Saturdays: order any brunch or main and get £5 spritz and cocktail slushies, all day and night until 2am.
+- Sensible Sundays: farm2fork roasts and £5 Bloody Good Basil Mary’s.
+
+The old burger, steak, Friday, boozy-lunch and seasonal spritz promotions have been removed. The old steak-weight and orphan-price conflicts below are historical, not unresolved details of the new offers. Regular menu dishes and prices have not been altered. No cheapest-meal rule, additional drink entitlement, discount-stacking restriction or new service time has been invented.
+
+There are dedicated food, live-music, What’s on/events, groups-and-hire and website-terms pages. The new hire page advertises large group bookings, celebrations and corporate/private hire based on the owner's instruction, with all capacity, exclusivity, minimum-spend and booking arrangements left to the pub to confirm. Email enquiries do not create reservations.
+
+The owner asked to leave the rugby competition unspecified. General live-sport copy is included, with no named new rugby competition, ITV partnership claim or fixture timetable. The original list of major terrestrial tournaments remains in the pub information. Saturday music is still weekly, with no invented acts, times or admission prices. Event announcements link to the venue's Instagram; no placeholder calendar events were added.
+
+## Draft website terms
+
+`src/pages/terms.html` is clearly marked as a draft for review and carries `noindex`. The legal company name, company number, registered office and place of registration remain explicit placeholders. The venue address is not presented as a confirmed registered office. These are website-use terms, not a new cancellation policy or a signed hire agreement. Finalise the company disclosures and obtain an appropriate legal review before treating the draft as adopted terms.
+
+Primary guidance consulted on 6 October 2026:
+
+- [CMA: Writing a fair contract for customers](https://www.gov.uk/guidance/writing-a-fair-contract-for-customers): clarity, fair terms and preserving consumer rights.
+- [GOV.UK: Signs, stationery and promotional material](https://www.gov.uk/running-a-limited-company/signs-stationery-and-promotional-material): company website disclosures, where applicable.
+
+The draft does not purport to be a privacy notice. Complete any required privacy information for the final hosting and booking setup before the main-domain launch.
+
 ## Migrated content
 
 | Original page | New location | Content retained |
 | --- | --- | --- |
 | `/` | Homepage | Gastropub positioning, organic food, welcome, garden, dogs, games, terrestrial sports, weekly offers, dress code, hiring, address, email, hours and social profiles |
 | `/reservations-1` | Homepage booking form | The actual DesignMyNight venue ID from the embedded widget; direct handoff to the same booking provider |
-| `/menu` and `/menu?menu=menu` | `/menu.html` | All 57 food items across 7 sections, descriptions, prices and 15 source dietary labels |
+| `/menu` and `/menu?menu=menu` | `/food.html` (legacy `/menu.html` retained) | All 57 food items across 7 sections, descriptions, prices and 15 source dietary labels |
 | `/wines` and `/menu?menu=wine` | `/menu.html?menu=wine` | All 29 wines across 4 sections, vintages, serving sizes and prices; both source lists were identical |
-| `/specials` | Weekly events | Monday burger night, Thursday steak night, Friday drinks offers, weekend lunch and seasonal spritz offer |
+| `/specials` | `/whats-on.html` and homepage | Original promotions replaced by the seven owner-supplied daily offers above |
 | `/about-us` | Our pub and Find us | Games room, outdoor dining, umbrellas/awnings/heaters caveat, dog facilities, terrestrial sports list, booking/enquiry distinction and walk-ins |
 | `/our-story` | Story section | Early-1900s Victoria Hotel, Queen’s Road renamed in 1944, Browns period, corner building, typewriters and community character |
 | `/team-3` | Food & drink | This is a secondary menu landing page, not a staff page; chef and trusted-supplier information plus main/brunch/roast menu links retained |

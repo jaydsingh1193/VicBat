@@ -1,19 +1,26 @@
 # The Victoria Battersea
 
-A responsive redesign of The Victoria Battersea website. Source and deployable static assets live in `dist/`. No framework, runtime packages, build step, secrets or database are required.
+A responsive redesign of The Victoria Battersea website. Page templates live in `src/pages/`, shared HTML components in `src/components/`, and deployable static assets in `dist/`. A small Node script expands the explicit component markers into complete HTML. No framework, runtime packages, secrets or database are required.
 
 ## Work locally
 
 Use Node.js 22 or later (through asdf if configured).
 
-- `npm run dev` starts the preview at `http://127.0.0.1:4173`.
+- `npm run build` updates the seven HTML pages in `dist/` from the source templates and shared components. Run after changing anything in `src/`.
+- `npm run dev` starts the preview at `http://127.0.0.1:4173` using the built files.
 - `npm run check` validates JavaScript syntax, HTML references, menu data and brand colour tokens.
 - `npm test` checks London dates, booking validation and the DesignMyNight handoff contract.
 - `npm run test:live` performs read-only checks against the existing reservation embed and provider. It never creates a booking.
 
 ## Content
 
-- `dist/index.html`: homepage, booking form, Saturday live music, weekly offers, pub facilities, story, hours, policies and recruitment.
+- `src/pages/index.html`: homepage, booking form, music, offers, live sport, group hire, pub facilities, story, hours, policies and recruitment.
+- `src/pages/food.html`: dedicated food page with the full main, brunch and roast menus. The existing `menu.html` food and wine URLs continue to work.
+- `src/pages/live-music.html`: Saturday live music and booking shortcuts. No performers or start times are invented.
+- `src/pages/whats-on.html`: daily offers, recurring music, live sport and links to the venue’s current event announcements.
+- `src/pages/groups-and-hire.html`: large group bookings, celebrations and corporate/event hire, with a pre-addressed email enquiry. This does not submit or confirm a booking.
+- `src/pages/terms.html`: draft website terms with explicit company-detail placeholders, linked from every footer. Complete and review before adopting them as final terms.
+- `src/components/`: shared navigation, footer, seven daily offers and general live-sport section. Content remains readable without JavaScript.
 - `dist/menu-data.json`: all 57 food items and 29 wines, imported from the current website, including source dietary labels and prices.
 - `dist/menu.html` and `dist/menu-components.js`: reusable, semantic menu rendering. Components only read their data and can render frozen fixtures.
 - `dist/styles.css`: shared branding tokens, locally hosted fonts and responsive layouts.
@@ -32,7 +39,7 @@ An optional, feature-detected WebMCP tool, `prepare_table_booking`, updates the 
 
 The public GitHub repository is `jaydsingh1193/VicBat`. GitHub Pages is configured to publish the website at https://jaydsingh1193.github.io/VicBat/. The original Sites preview also remains publicly accessible. No DNS or existing Wix configuration has been changed.
 
-The GitHub Pages workflow in `.github/workflows/pages.yml` validates the site and publishes only `dist/`. It supports manual runs and redeploys when site changes reach `main`. All local links, fonts, scripts and the menu JSON request are relative, so the same source works at a domain root or the `/VicBat/` project path.
+The GitHub Pages workflow in `.github/workflows/pages.yml` validates the site and publishes only `dist/`. Validation rejects generated HTML that differs from its source, so run `npm run build` and commit both source and output. It supports manual runs and redeploys when site changes reach `main`. All local links, fonts, scripts and the menu JSON request are relative, so the same source works at a domain root or the `/VicBat/` project path.
 
 GitHub Pages uses GitHub Actions as its publishing source. The repository was made public with the user’s explicit approval on 10 September 2026, enabling Pages on the current GitHub plan. The workflow publishes only website assets; documentation, tests and project metadata remain in the source repository rather than the hosted site.
 

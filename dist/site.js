@@ -33,10 +33,18 @@ function setupBooking() {
       date.focus();
     }
   });
-  document.querySelector('[data-book-saturday]').addEventListener('click', event => {
-    event.preventDefault();
-    stageBooking({ guests: form.elements.num_people.value, date: nextSaturday() });
-  });
+}
+
+function setupSaturdayLinks() {
+  const form = document.querySelector('.booking-form');
+  for (const link of document.querySelectorAll('[data-book-saturday]')) {
+    link.href = bookingUrl({ guests: 2, date: nextSaturday() });
+    if (!form) continue;
+    link.addEventListener('click', event => {
+      event.preventDefault();
+      stageBooking({ guests: form.elements.num_people.value, date: nextSaturday() });
+    });
+  }
 }
 
 async function setupAgentTool() {
@@ -63,4 +71,5 @@ for (const link of document.querySelectorAll('.mobile-nav a')) {
   link.addEventListener('click', () => { link.closest('details').open = false; });
 }
 setupBooking();
+setupSaturdayLinks();
 await setupAgentTool();

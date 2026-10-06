@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { sectionId } from '../dist/menu-components.js';
+import { pages, renderPage } from './build.mjs';
 
 const root = resolve('dist');
 const menu = JSON.parse(await readFile(`${root}/menu-data.json`, 'utf8'));
@@ -31,16 +32,18 @@ async function checkReference(reference, page, basePath = '/') {
   if (!url.hash) return;
   const html = await readFile(path, 'utf8');
   const id = decodeURIComponent(url.hash.slice(1));
-  const dynamic = target === '/menu.html' && menuIds.includes(id);
+  const dynamic = ['/menu.html', '/food.html'].includes(target) && menuIds.includes(id);
   assert.ok(dynamic || html.includes(`id="${id}"`), `Missing anchor: ${reference}`);
 }
 
-for (const page of ['index.html', 'menu.html']) {
+for (const page of pages) {
   const html = await readFile(`${root}/${page}`, 'utf8');
+  assert.equal(html, await renderPage(page), `${page} is stale; run npm run build`);
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `${page} has duplicate IDs`);
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1, `${page} needs one H1`);
   assert.ok(html.includes('<html lang="en-GB">'), `${page} must declare language`);
+  assert.ok(html.includes('href="./terms.html"'), `${page} must link to website terms`);
   assert.ok(!/<a\b[^>]*>(?:(?!<\/a>)[\s\S])*<a\b/.test(html), `${page} contains a nested link`);
   for (const basePath of ['/', '/VicBat/']) {
     for (const match of html.matchAll(/(?:href|src)="([^"]+)"/g)) await checkReference(match[1], page, basePath);

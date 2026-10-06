@@ -37,9 +37,9 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 500; }
 .site-header { position: sticky; top: 0; z-index: 10; height: 100px; padding: 0 var(--page-gutter); display: flex; align-items: center; justify-content: space-between; gap: 2rem; background: var(--color-ink); color: var(--color-paper); }
 .brand { display: flex; width: 170px; height: 80px; align-items: center; overflow: hidden; flex-shrink: 0; }
 .brand img { width: 170px; height: auto; }
-.desktop-nav { display: flex; gap: clamp(1.4rem, 3vw, 3rem); margin-left: auto; }
+.desktop-nav { display: flex; gap: clamp(1rem, 2vw, 2rem); margin-left: auto; }
 .desktop-nav a { font-size: .9rem; text-decoration: none; }
-.desktop-nav a:hover { text-decoration: underline; }
+.desktop-nav a:hover, .desktop-nav a[aria-current] { text-decoration: underline; }
 .button { display: inline-flex; justify-content: center; align-items: center; gap: 2rem; padding: .95rem 1.5rem; min-height: 50px; border: 1px solid transparent; border-radius: 2px; font-size: .9rem; font-weight: 600; text-decoration: none; line-height: 1.4; transition: background .18s, transform .18s; }
 .button:hover { transform: translateY(-2px); }
 .button-gold { background: var(--color-gold); color: var(--color-ink); }
@@ -113,17 +113,15 @@ h2 em, h3 em { font-weight: 400; }
 .music-copy .button { margin-top: 1.5rem; }
 .music-lineup { display: block; width: fit-content; font-size: .875rem; margin-top: 1rem; }
 .music-symbol { position: absolute; right: -1rem; top: -4rem; font-size: 25rem; color: var(--color-music); transform: rotate(-15deg); z-index: -1; line-height: 1; }
-.weekly-offers { display: grid; grid-template-columns: repeat(4, 1fr); margin: 2.5rem 0 2rem; }
-.offer { padding: .3rem 1.5rem; border-right: 1px solid var(--color-rule); }
-.offer:first-child { padding-left: 0; }
-.offer:last-child { border-right: 0; padding-right: 0; }
+.weekly-offers { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; margin: 2.5rem 0 2rem; }
+.offer { grid-column: span 3; padding: 1.5rem; background: var(--color-white); border-top: 3px solid var(--color-olive); display: flex; flex-direction: column; align-items: flex-start; }
+.offer:nth-child(n+5) { grid-column: span 4; }
 .offer .eyebrow { font-size: .75rem; letter-spacing: .07em; color: var(--color-muted); }
-.offer h3 { font-size: 2rem; margin: .8rem 0 .5rem; }
+.offer h3 { font-size: 2.1rem; line-height: 1.05; margin: 1rem 0 .8rem; }
+.offer .offer-subtitle { font-weight: 600; margin-bottom: .5rem; }
 .offer > p:not(.eyebrow):not(.offer-price), .offer li { font-size: .875rem; }
 .offer ul { padding: 0; margin: 0; list-style: none; }
-.offer-price { font-family: var(--font-display); font-size: 1.8rem; margin-top: .6rem; }
-.spritz-note { padding-top: 1.4rem; border-top: 1px solid var(--color-rule); font-size: .9rem; text-align: center; }
-.spritz-note > span { margin-right: .7rem; color: var(--color-accent); }
+.offer-price { font-family: var(--font-display); font-size: 1.8rem; padding-top: 1.2rem; margin-top: auto; }
 .pub-section { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 6vw, 6.5rem); align-items: center; }
 .pub-photo { position: relative; }
 .pub-photo img { width: 100%; aspect-ratio: 4 / 4.7; object-fit: cover; }
@@ -165,6 +163,7 @@ tbody th { font-weight: 600; }
 .footer-top nav { display: flex; gap: 1.3rem; font-size: .875rem; }
 .footer-bottom { padding-top: 1rem; font-size: .75rem; }
 .footer-bottom > p { margin: 0; }
+.footer-links { display: flex; flex-wrap: wrap; gap: .8rem 1.8rem; padding: 1.4rem 0; border-bottom: 1px solid var(--color-dark-rule); font-size: .8rem; }
 .menu-hero { background: var(--color-paper); text-align: center; padding: 3.5rem var(--page-gutter) 2.5rem; }
 .menu-hero h1 { font-size: clamp(3.5rem, 6vw, 5.5rem); line-height: 1.1; margin: .7rem 0; }
 .menu-hero > p:last-child { color: var(--color-muted); max-width: 600px; margin: auto; }
@@ -188,6 +187,83 @@ tbody th { font-weight: 600; }
 .menu-loading a { display: inline; }
 .menu-note { margin-top: 2.5rem; font-size: .875rem; color: var(--color-muted); }
 .wine-price { font-size: .95rem; margin-top: .5rem; }
+.split-hero { display: grid; grid-template-columns: 1.15fr 1fr; background: var(--color-paper); }
+.split-hero-copy { padding: 4.5rem 3rem 4.5rem var(--page-gutter); align-self: center; }
+.split-hero h1 { font-size: clamp(3.5rem, 6.5vw, 6.5rem); margin: 1.2rem 0 1.5rem; }
+.split-hero h1 em, .menu-hero h1 em { color: var(--color-olive); }
+.split-hero-copy > p:not(.eyebrow) { max-width: 530px; color: var(--color-muted); }
+.split-hero-copy > .button, .split-hero-copy > .cta-actions { margin-top: 1.8rem; }
+.split-hero > img { width: 100%; height: 100%; max-height: 620px; object-fit: cover; }
+.food-hero > img { object-position: center 60%; }
+.inline-links { display: flex; flex-wrap: wrap; gap: 1rem 1.8rem; margin-top: 1.8rem; font-size: .9rem; }
+.cta-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 1.5rem; }
+.split-hero .cta-actions { justify-content: flex-start; }
+.occasion-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; }
+.occasion { border-top: 1px solid var(--color-rule); padding-top: 1rem; }
+.occasion-number { font-size: .8rem; color: var(--color-muted); }
+.occasion h3 { font-size: 2.5rem; line-height: 1.1; margin: 1rem 0; }
+.occasion p { color: var(--color-muted); }
+.enquiry-section { background: var(--color-paper); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+.enquiry-section h2, .group-teaser h2, .group-extras h2, .music-plan h2, .events-updates h2 { margin: 1rem 0 1.5rem; }
+.enquiry-section > div > p:not(.eyebrow), .group-teaser p:not(.eyebrow), .group-extras p:not(.eyebrow), .music-plan p:not(.eyebrow), .events-updates > p:not(.eyebrow) { color: var(--color-muted); max-width: 560px; }
+.enquiry-section .button { margin-top: 1.8rem; }
+.enquiry-address { margin-top: 1rem; font-size: .9rem; overflow-wrap: anywhere; }
+.enquiry-checklist { padding: 2.5rem; background: var(--color-white); }
+.enquiry-checklist h3 { font-size: 2.3rem; line-height: 1.1; }
+.enquiry-checklist ol { padding-left: 1.2rem; margin: 1.5rem 0; }
+.enquiry-checklist li { padding: .5rem 0 .5rem .5rem; border-bottom: 1px solid var(--color-rule); }
+.enquiry-checklist > p { color: var(--color-muted); font-size: .875rem; }
+.enquiry-checklist .text-link { margin-top: 1.5rem; }
+.group-teaser, .group-extras { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.group-teaser > img, .group-extras > img { width: 100%; height: 400px; object-fit: cover; }
+.group-teaser .button { margin-top: 1.8rem; }
+.group-extras p + p { margin-top: 1rem; }
+.sport-section { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; background: var(--color-olive); color: var(--color-paper); }
+.sport-copy h2 { margin: 1rem 0 1.5rem; }
+.sport-copy > p { max-width: 550px; }
+.sport-copy .button { margin-top: 1.8rem; }
+.sport-details { border-left: 1px solid var(--color-dark-rule); padding-left: 3rem; align-self: center; }
+.sport-list { list-style: none; padding: 0; margin: 1rem 0 1.5rem; font-family: var(--font-display); font-size: 2rem; line-height: 1.3; }
+.sport-list li { padding: .5rem 0; border-bottom: 1px solid var(--color-dark-rule); }
+.sport-details > p:last-child { font-size: .875rem; }
+.music-hero { position: relative; isolation: isolate; overflow: hidden; background: var(--color-ink); color: var(--color-paper); padding: 5rem var(--page-gutter); text-align: center; }
+.music-hero h1 { font-size: clamp(4rem, 8vw, 8rem); margin: 1.5rem 0 2rem; }
+.music-hero-label { width: fit-content; margin: 0 auto 1.5rem; padding: .7rem 1.2rem; border: 1px solid var(--color-dark-rule); letter-spacing: .15em; font-size: .85rem; }
+.music-hero > .button { margin-top: 2rem; }
+.music-hero > .music-symbol { font-size: 38rem; top: 4rem; }
+.music-plan { display: grid; grid-template-columns: 1.3fr 1fr; gap: 5rem; align-items: center; }
+.music-plan p + p { margin-top: 1rem; }
+.saturday-note { padding: 3rem; background: var(--color-paper); }
+.saturday-note h3 { font-size: 4rem; line-height: .95; margin: 1.5rem 0; }
+.saturday-note .text-link { margin-top: 1.5rem; }
+.events-feature { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
+.event-date { padding: 3rem 1.5rem; text-align: center; background: var(--color-ink); color: var(--color-paper); display: flex; flex-direction: column; gap: 1rem; }
+.event-date span { letter-spacing: .2em; font-size: .75rem; }
+.event-date strong { font: italic 500 clamp(3rem, 5vw, 5rem)/1.1 var(--font-display); color: var(--color-gold); }
+.events-feature h2 { margin: 1rem 0 1.5rem; }
+.events-feature p:not(.eyebrow) { color: var(--color-muted); }
+.events-feature .button { margin-top: 1.8rem; }
+.events-updates { text-align: center; }
+.events-updates > p:not(.eyebrow) { margin: auto; }
+.events-updates .inline-links { justify-content: center; }
+.food-offer-strip { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; padding: 2rem var(--page-gutter); background: var(--color-paper); }
+.legal-copy { max-width: 860px; margin: 0 auto; padding: 3rem var(--page-gutter) 5rem; }
+.legal-copy section { margin-top: 2.2rem; }
+.legal-copy h2 { font-size: 2rem; line-height: 1.2; margin-bottom: 1rem; }
+.legal-copy p + p { margin-top: 1rem; }
+.draft-notice { padding: 1.5rem; border-left: 3px solid var(--color-accent); background: var(--color-paper); }
+.draft-notice p { margin-top: .5rem; }
+.company-details { padding: 1.5rem; border: 1px solid var(--color-rule); }
+.company-details dt { font-weight: 600; }
+.company-details dd { margin: 0 0 1rem; color: var(--color-muted); }
+.company-details dd:last-child { margin-bottom: 0; }
+@media (min-width: 851px) and (max-width: 1150px) {
+  .site-header { gap: 1rem; padding-right: 1.5rem; padding-left: 1.5rem; }
+  .site-header .brand, .site-header .brand img { width: 125px; }
+  .desktop-nav { gap: 1rem; }
+  .desktop-nav a { font-size: .8rem; }
+  .header-book { gap: .7rem; padding: .8rem 1rem; }
+}
 @media (max-width: 850px) {
   .desktop-nav { display: none; }
   .site-header { height: 85px; }
@@ -214,9 +290,9 @@ tbody th { font-weight: 600; }
   .live-music { padding: 2rem; gap: 2rem; }
   .music-day { padding-right: 1.5rem; }
   .music-copy h3 { font-size: 2.5rem; }
-  .weekly-offers { grid-template-columns: 1fr 1fr; gap: 2rem 0; }
-  .offer:nth-child(2) { border-right: 0; }
-  .offer:nth-child(3) { padding-left: 0; }
+  .weekly-offers { grid-template-columns: 1fr 1fr; }
+  .offer, .offer:nth-child(n+5) { grid-column: auto; }
+  .offer:last-child { grid-column: 1 / -1; }
   .pub-section { gap: 2rem; align-items: start; }
   .story-section { gap: 2rem; }
   .visit-section { gap: 2rem; grid-template-columns: 1fr 1.2fr; }
@@ -224,6 +300,14 @@ tbody th { font-weight: 600; }
   .footer-top { flex-wrap: wrap; }
   .footer-top nav { margin-bottom: .5rem; }
   .dish-grid { gap: 0 1.5rem; }
+  .split-hero-copy { padding: 3rem var(--page-gutter); }
+  .split-hero h1 { font-size: 3.6rem; }
+  .split-hero > img { min-height: 420px; }
+  .occasion-grid { gap: 1.5rem; }
+  .occasion h3 { font-size: 2rem; }
+  .enquiry-section, .group-teaser, .group-extras, .sport-section, .music-plan, .events-feature { gap: 2rem; }
+  .enquiry-checklist, .saturday-note { padding: 1.5rem; }
+  .sport-details { padding-left: 2rem; }
 }
 @media (max-width: 520px) {
   .site-header { gap: 1rem; }
@@ -262,9 +346,8 @@ tbody th { font-weight: 600; }
   .music-day strong { font-size: 4.5rem; line-height: 1.3; }
   .music-copy .button { width: 100%; }
   .music-lineup { margin-left: auto; margin-right: auto; text-align: center; }
-  .weekly-offers { grid-template-columns: 1fr; gap: 0; margin-bottom: 1rem; }
-  .offer, .offer:first-child, .offer:last-child, .offer:nth-child(3) { border-right: 0; border-bottom: 1px solid var(--color-rule); padding: 1.4rem 0; }
-  .offer:last-child { border-bottom: 0; }
+  .weekly-offers { grid-template-columns: 1fr; margin-bottom: 1.5rem; }
+  .offer { padding: 1.5rem; }
   .pub-section, .story-section, .visit-section { grid-template-columns: 1fr; }
   .pub-photo img { aspect-ratio: 1.1; }
   .story-section { padding-top: 3.5rem; padding-bottom: 3.5rem; }
@@ -278,6 +361,17 @@ tbody th { font-weight: 600; }
   .menu-page { padding-top: 1.5rem; }
   .menu-category-nav { gap: .8rem 1.2rem; justify-content: flex-start; }
   .dish-title { gap: 1rem; }
+  .split-hero, .occasion-grid, .enquiry-section, .group-teaser, .group-extras, .sport-section, .music-plan, .events-feature { grid-template-columns: 1fr; }
+  .split-hero > img { min-height: 0; height: 300px; }
+  .split-hero h1 { font-size: 3.8rem; }
+  .occasion h3 br { display: none; }
+  .group-teaser > img, .group-extras > img { height: 300px; }
+  .sport-details { border-left: 0; border-top: 1px solid var(--color-dark-rule); padding: 2rem 0 0; }
+  .footer-links { justify-content: center; }
+  .music-hero { padding-top: 3rem; padding-bottom: 3.5rem; }
+  .music-hero-label { font-size: .7rem; }
+  .music-hero h1 { font-size: 4.1rem; }
+  .food-offer-strip { flex-direction: column; text-align: center; }
 }
 @media print {
   .site-header, .site-footer, .mobile-book, .closing-cta, .menu-switch { display: none; }
